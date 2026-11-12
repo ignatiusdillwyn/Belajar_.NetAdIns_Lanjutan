@@ -1,0 +1,24 @@
+using Microsoft.AspNetCore.Mvc;
+using CineBook.Services;
+
+namespace CineBook.Controllers
+{
+    [ApiController]
+    [Route("api/seats")]
+    public class SeatsController : ControllerBase
+    {
+        private readonly ISeatService _seatService;
+
+        public SeatsController(ISeatService seatService)
+        {
+            _seatService = seatService;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetSeats([FromQuery] long scheduleId)
+        {
+            var seats = await _seatService.GetByScheduleIdAsync(scheduleId);
+            return Ok(seats);
+        }
+    }
+}
