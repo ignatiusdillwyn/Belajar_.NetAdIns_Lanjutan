@@ -47,6 +47,7 @@ namespace CineBook.Services
             {
                 throw new InvalidTicketCountException(request.TotalTickets, request.SeatIds.Count);
             }
+
             await _bookingRepository.BeginTransactionAsync();
             try
             {
